@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Container, Card, Form, Button, Row } from 'react-bootstrap'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { login, registration } from '../../src/http/userAPI'
+import { fetchCart, fetchCartProductsByCartId } from '../../src/http/productAPI'
 import { REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts'
 import { LOGIN_ROUTE } from '../utils/consts'
 import { observer } from 'mobx-react-lite'
@@ -9,7 +10,7 @@ import { Context } from '..'
 
 const AuthPage = observer(() => {
 
-  const { user } = useContext(Context)
+  const { user, product } = useContext(Context)
   const history = useHistory()
   const location = useLocation()
   const isLogin = location.pathname === LOGIN_ROUTE
@@ -18,14 +19,24 @@ const AuthPage = observer(() => {
 
   const clickHandler = async () => {
     try {
-      let data
+      let currUser
       if (isLogin) {
-        data = await login(email, password)
+        currUser = await login(email, password)
       } else {
-        data = await registration(email, password)
+        currUser = await registration(email, password).finally(() => {
+          fetchCart(user.user.id).then(data => {
+            if (!data || data.result === 'not found') {
+            } else {
+                product.setCart(data.id)
+                fetchCartProductsByCartId(data.id).then(data => {
+                    product.setCartProducts(data)
+                })
+            }
+        })
+        })
       }
 
-      user.setUser(data)
+      user.setUser(currUser)
       user.setIsAuth(true)
       history.push(SHOP_ROUTE)
     } catch (e) {
