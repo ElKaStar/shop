@@ -1,0 +1,144 @@
+/******************************************************************************
+START Glitch hello-app default styles
+
+The styles in this section do some minimal CSS resets, set default fonts and 
+colors, and handle the layout for our footer and "Remix on Glitch" button. If
+you're new to CSS they may seem a little complicated, but you can scroll down
+to this section's matching END comment to see page-specific styles.
+******************************************************************************/
+/* Our default values set as CSS variables */
+
+  body {
+    font-family: "Playfair Display", serif;
+  }
+  
+  #navbar {
+    background-color: rgb(255, 255, 255);
+  }
+
+  
+  @keyframes go-left-right {
+    /* give it a name: "go-left-right" */
+    from {
+      left: 0px;
+    } /* animate from left: 0px */
+    to {
+      left: calc(100% - 50px);
+    } /* animate to left: 100%-50px */
+  }
+  
+  @keyframes trembling {
+    0% {
+      transform: translateX(-1000px);
+    }
+    60% {
+      transform: translateX(-10px) rotate(-2deg);
+    }
+    80% {
+      transform: translateX(10px) rotate(2deg);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+      background-color: #333;
+    }
+  }
+  
+  #delivery {
+    left: 0px;
+    animation: trembling 5s ease-in-out;
+  }
+  
+.link {
+    padding: 7px 7px 7px 7px !important;
+    color: '#52527a'!important; 
+}
+
+.link:hover {
+    color: white !important;
+    background: black;
+    border-radius: 5px;
+  }
+
+  .lable {
+    padding: 7px 7px 7px 7px !important;
+    color: '#52527a'!important; 
+    font-size: 1.5rem;
+}
+.lable:hover {
+  color: white !important;
+  background: black;
+  border-radius: 50%;
+}
+
+.load-more {
+  box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+  margin-top: 20px !important;
+}
+
+.load-more:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 0px;
+}
+
+.phone_mask {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.active {
+  background: rgb(139, 121, 145) !important;
+  border-color: rgb(95, 77, 101) !important;
+  color: white !important;
+}
+
+.card:active {
+  background: rgb(139, 121, 145) !important;
+  border-color: rgb(95, 77, 101) !important;
+  border-radius: 1%;
+  color: white !important;
+} 
+.button-style {
+  background: white !important;
+  border-color: rgb(95, 77, 101) !important;
+  border-radius: 5px !important;
+  box-shadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px";
+  color: rgb(95, 77, 101) !important;
+}
+
+.delete-button {
+  background: rgb(139, 121, 145) !important;
+  border-radius: 5px !important;
+  border-color: rgb(95, 77, 101) !important;
+  color: white !important;
+}
+
+.cardStyle {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.cardStyle:hover {
+  box-shadow: 0px 0px 0px 0px !important;
+}
+
+.card_new_product {
+  margin: 0 auto !important;
+  height: 30rem !important;
+  width: auto !important;
+}
+
+.img_card_new_product {
+  width: 100% !important;
+  height: 85% !important;
+}
+
+.card_body {
+  padding-top: 0 !important;
+  margin-top: 0px !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.product_image {
+  justify-content: center !important;
+  align-items: center !important;
+}
