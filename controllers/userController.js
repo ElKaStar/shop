@@ -1,6 +1,6 @@
 const { User, Cart } = require("../models/models");
 const ApiError = require('../error/apiArror')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 
