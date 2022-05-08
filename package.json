@@ -23,12 +23,12 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.2",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
+    "uuid": "^8.3.2",
     "express": "^4.18.1",
     "express-favicon": "^2.0.1",
-    "nodemon": "^2.0.7",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
