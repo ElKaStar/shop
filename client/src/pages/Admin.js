@@ -24,7 +24,7 @@ const sendTestEmail = () => {
   return (
    <Container className="d-flex flex-column">
      <Button onClick={() => setTypeVisible(true)} variant={"outline-dark"} className="mt-2">Добавить тип</Button>
-     <Button onClick={() => setGenderVisible(true)} variant={"outline-dark"} className="mt-2">Добавить раздел</Button>
+     <Button onClick={() => setGenderVisible(true)} variant={"outline-dark"} className="mt-2">Добавить раздел/пол</Button>
      <Button onClick={() => setPropertyVisible(true)} variant={"outline-dark"} className="mt-2">Добавить новое свойство товара</Button>
      <Button onClick={() => setStatusVisible(true)} variant={"outline-dark"} className="mt-2">Добавить новый статус заказа</Button>
      <Button onClick={() => setProductVisible(true)} variant={"outline-dark"} className="mt-2">Добавить товар</Button>

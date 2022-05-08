@@ -25,8 +25,7 @@ const NavBar = observer(() => {
     }
 
     useEffect(() => {
-        console.log(user.user)
-        if (!user) {
+        if (!user.hasOwnProperty('user') & !user.user.hasOwnProperty('id')) {
         } else {
             fetchCart(user.user.id).then(data => {
                 if (!data || data.result === 'not found') {
