@@ -18,8 +18,7 @@ app.use('/api', router)
 
 app.use(errorHandlingMiddleware)
 
-process.env.PWD = process.cwd();
-app.use(express.static(path.join(process.env.PWD, 'client', 'build')));
+app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 })

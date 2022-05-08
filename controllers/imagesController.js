@@ -9,7 +9,7 @@ class ImagesController {
         const {productId} = req.body
         const {scr} = req.files
         let fileName = uuid.v4() + ".jpg"
-        scr.mv(path.resolve(__dirname, 'client', 'build', 'static', fileName))
+        scr.mv(path.resolve(__dirname, '..', 'static', fileName))
         const image = await Images.create({productId, scr: fileName})
         return res.json(image)
     }

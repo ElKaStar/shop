@@ -67,7 +67,7 @@ const ProductPage = observer(() => {
   }
 
   const adjImages = state.images.map(e => {
-    return  process.env.REACT_APP_API_URL + `client/build/static/${e.scr}`
+    return  process.env.REACT_APP_API_URL + `${e.scr}`
   })
 
   const addToCart = () => {
