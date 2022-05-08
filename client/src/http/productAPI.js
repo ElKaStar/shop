@@ -88,7 +88,7 @@ export const createCatalogsInfo = async (description, catalogId, productId) => {
 }
 
 export const createCart = async (userId, statusId, isCart) => {
-    const {data} = await $authhost.post('api/cart', {userId, statusId, isCart})
+    const {data} = await $authhost.post('api/cart', {userId, statusId, inCart: isCart})
     return data
 }
 

@@ -6,8 +6,11 @@ const sequelize = require('./../db')
 
 class CartController {
     async createNewCart(req, res) {
-        const { userId, statusId, isCart } = req.body
-        const newCart = await Cart.create({ userId, statusId, isCart })
+        const { userId, statusId, inCart } = req.body
+        if (!userId || !statusId) {
+            return next(ApiError.badRequest(`Id don't mentioned`))
+        }
+        const newCart = await Cart.create({ userId, statusId, inCart: true })
         return res.json(newCart)
     }
     async getCartByUser(req, res, next) {
