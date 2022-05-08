@@ -24,12 +24,12 @@ const AuthPage = observer(() => {
       } else {
         data = await registration(email, password)
       }
-      
+
       user.setUser(data)
       user.setIsAuth(true)
       history.push(SHOP_ROUTE)
     } catch (e) {
-      alert(e.response.data.message)
+      throw e
     }
 
   }

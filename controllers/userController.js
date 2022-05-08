@@ -15,6 +15,7 @@ const generateJwt = (id, email, role) => {
 
 class UserController {
     async registration(req, res, next) {
+        console.log(email, password, role)
         const { email, password, role} = req.body
         if (!email || !password) {
             return next(ApiError.badRequest(`Email or password don't mentioned`))
