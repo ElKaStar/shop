@@ -18,14 +18,19 @@ app.use('/api', router)
 
 app.use(errorHandlingMiddleware)
 
+app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+})
 
-const start  = async () => {
+
+const start = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
 
         app.listen(PORT, () => console.log(`Server is started on port ${PORT}`))
-    } catch(e) {
+    } catch (e) {
         console.log(e)
     }
 }
