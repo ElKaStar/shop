@@ -82,7 +82,7 @@ const CreateProduct = observer(({ show, onHide }) => {
         fetchGenders().then(data => product.setGenders(data))
         fetchProperties().then(data => product.setProperties(data))
         fetchCatalogs().then(data => product.setCatalogs(data))
-    }, [info])
+    }, [])
 
     //name, price, typeId, genderId
     const addProduct = () => {
@@ -93,7 +93,8 @@ const CreateProduct = observer(({ show, onHide }) => {
                     formData.append('productId', data.id)
                     formData.append('scr', element.src)
                     uploadImage(formData).then(data => setImages([]))
-                }).finally(() => setImages([]))
+                })
+                setImages([])
                 //add info
                 info.forEach((element) => {
                     uploadProductInfo(data.id, element.id, element.description).then(data => setInfo([]))
