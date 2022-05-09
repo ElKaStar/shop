@@ -5,12 +5,18 @@ const sequelize = require('./../db')
 
 
 class CartController {
-    async createNewCart(req, res) {
+    async createNewCart(req, res, next) {
         const { userId, statusId, inCart } = req.body
-        if (!userId || !statusId) {
+        if (!userId) {
             return next(ApiError.badRequest(`Id don't mentioned`))
         }
-        const newCart = await Cart.create({ userId, statusId, inCart: true })
+        let statusCurr
+        if (!statusId) {
+            statusCurr = null
+        } else {
+            statusCurr =  statusId
+        }
+        const newCart = await Cart.create({ userId, statusCurr, inCart: true })
         if (!newCart) {
             return res.status(404).json({ data: 'not found' })
         } else {
