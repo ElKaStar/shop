@@ -31,19 +31,17 @@ const AuthPage = observer(() => {
       } else {
         user.setUser(currUser)
         user.setIsAuth(true)
-
-        fetchCart(currUser.id).then(data => {
-          console.log('fetchCart', data)
-          if (!data || data.result === 'not found') {
-            console.log('currUser2', currUser)
-            createCart(currUser.id).then(data => {
-              product.setCart(data.id)
-            })
-          } else {
-            console.log('currUser3', currUser)
+        console.log('currUser10', currUser)
+        let cart = await fetchCart(currUser.id)
+        if (!cart || cart.result === 'not found') {
+          console.log('currUser2', currUser)
+          createCart(currUser.id).fina(data => {
             product.setCart(data.id)
-          }
-        })
+          })
+        } else {
+          console.log('currUser3', currUser)
+          product.setCart(cart.id)
+        }
       }
       history.push(SHOP_ROUTE)
     } catch (e) {

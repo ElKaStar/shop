@@ -30,7 +30,7 @@ class CartController {
                 }
             })
             if (!currCart) {
-                return res.status(404).json({ result: 'not found' })
+                return res.status(204).json({ result: 'not found' })
             }
             return res.json(currCart)
         }
