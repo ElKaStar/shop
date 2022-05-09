@@ -85,11 +85,8 @@ const CreateProduct = observer(({ show, onHide }) => {
         createProduct(name, price, product.selectedType.id, product.selectedGender.id)
             .then(data => {
                 images.forEach((element) => {
-                    const formData = new FormData()
-                    formData.append('productId', data.id)
-                    formData.append('scr', element.src)
-                    uploadImage(formData).then(data => setImages([]))
-                })
+                    uploadImage(data.id, element.src).then(data => console.log(data))
+                }).finally(() => setImages([]))
                 //add info
                 info.forEach((element) => {
                     uploadProductInfo(data.id, element.id, element.description).then(data => setInfo([]))
