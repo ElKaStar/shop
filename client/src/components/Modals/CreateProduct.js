@@ -13,6 +13,7 @@ const CreateProduct = observer(({ show, onHide }) => {
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
+    const [selectedCatalog, setSelectedCatalog] = useState(null)
 
 
 
@@ -70,6 +71,11 @@ const CreateProduct = observer(({ show, onHide }) => {
         setInfo(newInfo)
     }
 
+    const selectedCatalogHandling = (el) => {
+        product.setSelectedCatalog(el)
+        setSelectedCatalog(el)
+    }
+
 
     useEffect(() => {
         fetchTypes().then(data => product.setTypes(data))
@@ -79,10 +85,10 @@ const CreateProduct = observer(({ show, onHide }) => {
     }, [info])
 
     //name, price, typeId, genderId
-    const addProduct = () => {
+    const addProduct = async () => {
 
 
-        createProduct(name, price, product.selectedType.id, product.selectedGender.id)
+        const newProd = await createProduct(name, price, product.selectedType.id, product.selectedGender.id)
             .then(data => {
                 images.forEach((element) => {
                     const formData = new FormData()
@@ -94,8 +100,13 @@ const CreateProduct = observer(({ show, onHide }) => {
                 info.forEach((element) => {
                     uploadProductInfo(data.id, element.id, element.description).then(data => setInfo([]))
                 })
-                createCatalogsInfo(product.selectedCatalog.name, product.selectedCatalog.id, data.id)
             })
+        if (!newProd) {
+
+        } else {
+            createCatalogsInfo(selectedCatalog.name, selectedCatalog.id, newProd.id)
+        }
+
         onHide()
     }
 
@@ -132,8 +143,8 @@ const CreateProduct = observer(({ show, onHide }) => {
                     <Dropdown.Toggle>{product.selectedCatalog.name || 'Выберете каталог для товара'}</Dropdown.Toggle>
                     <Dropdown.Menu>
                         {product.catalogs.map(el =>
-                            <Dropdown.Item onClick={() => product.setSelectedCatalog(el)} key={el.id}>{el.name}</Dropdown.Item>
-                        )}
+                            <Dropdown.Item onClick={() => selectedCatalogHandling(el)} key={el.id}>{el.name}</Dropdown.Item>
+                        )} 
                     </Dropdown.Menu>
                 </Dropdown>
                 <Form>
