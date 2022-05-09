@@ -90,7 +90,7 @@ to this section's matching END comment to see page-specific styles.
   color: white !important;
 }
 
-.card:active {
+.mystylecard:active {
   background: rgb(139, 121, 145) !important;
   border-color: rgb(95, 77, 101) !important;
   border-radius: 1%;
