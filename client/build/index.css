@@ -84,12 +84,6 @@ to this section's matching END comment to see page-specific styles.
   margin-top: 5px;
 }
 
-.active {
-  background: rgb(139, 121, 145) !important;
-  border-color: rgb(95, 77, 101) !important;
-  color: white !important;
-}
-
 .mystylecard:active {
   background: rgb(139, 121, 145) !important;
   border-color: rgb(95, 77, 101) !important;

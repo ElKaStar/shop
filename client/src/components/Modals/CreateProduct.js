@@ -36,7 +36,7 @@ const CreateProduct = observer(({ show, onHide }) => {
         const newFiles = [...images]
         newFiles.map((item) => {
             if (item.number === number) {
-                item.src = e.target.value
+                item.src = e.target.files[0]
             }
             return item
         })
@@ -85,7 +85,10 @@ const CreateProduct = observer(({ show, onHide }) => {
         createProduct(name, price, product.selectedType.id, product.selectedGender.id)
             .then(data => {
                 images.forEach((element) => {
-                    uploadImage(data.id, element.src).then(data => console.log(data))
+                    const formData = new FormData()
+                    formData.append('productId', data.id)
+                    formData.append('scr', element.src)
+                    uploadImage(formData).then(data => setImages([]))
                 }).finally(() => setImages([]))
                 //add info
                 info.forEach((element) => {
@@ -162,8 +165,7 @@ const CreateProduct = observer(({ show, onHide }) => {
                     >
                         <Col md={6}>
                             <Form.Control
-                                value={images.scr}
-                                type="text"
+                                type="file"
                                 onChange={(e) => selectFile(e, i.number)}
                             />
                         </Col>

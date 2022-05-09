@@ -77,8 +77,8 @@ export const fetchCatalogsInfoById = async (id) => {
     return data
 }
 
-export const uploadImage = async (productId, scr) => {
-    const {data} = await $authhost.post('api/images', {productId, scr})
+export const uploadImage = async (formData) => {
+    const {data} = await $authhost.post('api/images', formData)
     return data
 }
 export const uploadProductInfo = async (productId, propertyId, description) => {
