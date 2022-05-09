@@ -101,7 +101,7 @@ const CartModal = observer(({ show, onHide }) => {
                                 <Col md={2}>
                                     <img
                                         style={{ width: '50px', height: '50px' }}
-                                        src={process.env.REACT_APP_API_URL + item.scr} alt=''></img>
+                                        src={item.scr} alt=''></img>
                                 </Col>
                                 <Col md={3}>
                                     {item.name}

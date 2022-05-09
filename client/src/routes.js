@@ -20,6 +20,10 @@ export const authRoutes = [
 {
     path: CART_ROUTE,
     Component: CartPage
+},
+{
+    path: PROFILE_ROUTE,
+    Component: ProfilePage
 }
 
 ]
@@ -56,10 +60,6 @@ export const publicRoutes = [
     {
         path: HOWTO_ROUTE,
         Component: HowTo
-    },
-    {
-        path: PROFILE_ROUTE,
-        Component: ProfilePage
     }
 ]
 
