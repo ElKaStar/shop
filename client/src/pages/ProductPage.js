@@ -70,21 +70,29 @@ const ProductPage = observer(() => {
     return `${e.scr}`
   })
 
-  const addToCart = () => {
+  const addToCart = async () => {
     console.log('cart', cart)
     if (!cart) {
-      createCart(user.user.id).then(data => {
-        setCart(data.id)
-        product.setCart(data.id)
-        createCartProducts(data.id, id, state.price, 1).then(data => {
+      let newCart
+      newCart = await fetchCart(user.user.id)
+        if (!newCart || newCart.result === 'not found') {
+          newCart = await createCart(user.user.id)
+          product.setCart(newCart.id)
+          setCart(newCart.id)
+        } else {
+          product.setCart(newCart.id)
+          setCart(newCart.id)
+        }
+
+        let myCartProd = await createCartProducts(cart, id, state.price, 1).then(data => {
         }).finally(() => {
           setIsCart(true)
           showPopUp()
-          fetchCartProductsByCartId(data.id).then(data => {
+          fetchCartProductsByCartId(cart).then(data => {
             product.setCartProducts(data)
           })
         })
-      })
+     
     } else {
       createCartProducts(cart, id, state.price, 1).then(data => {
       }).finally(() => {
