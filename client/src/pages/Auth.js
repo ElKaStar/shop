@@ -35,9 +35,9 @@ const AuthPage = observer(() => {
         let cart = await fetchCart(currUser.id)
         if (!cart || cart.result === 'not found') {
           console.log('currUser2', currUser)
-          createCart(currUser.id).fina(data => {
-            product.setCart(data.id)
-          })
+          cart = await createCart(currUser.id)
+          product.setCart(cart)
+
         } else {
           console.log('currUser3', currUser)
           product.setCart(cart.id)
@@ -45,44 +45,44 @@ const AuthPage = observer(() => {
       }
       history.push(SHOP_ROUTE)
     } catch (e) {
-    throw e
+      throw e
+    }
+
   }
 
-}
-
   return (
-  <Container className="d-flex justify-content-center align-items-center p-5">
-    <Card style={{ width: '600px' }} className="p-5">
-      <h2 className="m-auto"> {isLogin ? "Авторизация" : "Регистрация"}</h2>
-      <Form className="d-flex flex-column">
-        <Form.Control
-          className="mt-3"
-          placeholder="Введите email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Form.Control
-          className="mt-3"
-          placeholder="Введите пароль"
-          value={password}
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-          {isLogin ? <div>Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйтесь</NavLink> </div>
-            : <div>Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите</NavLink> </div>
-          }
-          <Button
-            variant={"outline-dark"}
-            onClick={() => clickHandler()}
-          >
-            {isLogin ? "Войти" : "Зарегистрироваться"}
-          </Button>
-        </Row>
-      </Form>
-    </Card>
-  </Container>
-)
+    <Container className="d-flex justify-content-center align-items-center p-5">
+      <Card style={{ width: '600px' }} className="p-5">
+        <h2 className="m-auto"> {isLogin ? "Авторизация" : "Регистрация"}</h2>
+        <Form className="d-flex flex-column">
+          <Form.Control
+            className="mt-3"
+            placeholder="Введите email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Form.Control
+            className="mt-3"
+            placeholder="Введите пароль"
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
+            {isLogin ? <div>Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйтесь</NavLink> </div>
+              : <div>Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите</NavLink> </div>
+            }
+            <Button
+              variant={"outline-dark"}
+              onClick={() => clickHandler()}
+            >
+              {isLogin ? "Войти" : "Зарегистрироваться"}
+            </Button>
+          </Row>
+        </Form>
+      </Card>
+    </Container>
+  )
 })
 
 export default AuthPage;
