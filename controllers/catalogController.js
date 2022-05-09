@@ -1,16 +1,21 @@
 const { Catalogs } = require("../models/models");
 const ApiError = require('../error/apiArror');
 const sequelize = require('./../db');
-const uuid = require('uuid')
-const path = require('path')
+
 
 class CatalogsController {
     async create(req, res) {
-        const {name, isNew} = req.body
-        const {scr} = req.files
-        let fileName = uuid.v4() + ".jpg"
-        scr.mv(path.resolve(__dirname, '..', 'static', fileName))
-        const catalogs = await Catalogs.create({name, isNew, scr: fileName})
+        const {name, scr} = req.body
+        let isNew
+        if (!name) {
+            return next(ApiError.badRequest(`Id don't mentioned`))
+        }
+        if (name === 'New') {
+            isNew = true
+        } else {
+            isNew = false
+        }
+        const catalogs = await Catalogs.create({name, isNew, scr})
         return res.json(catalogs)
     }
     async get(req, res) {

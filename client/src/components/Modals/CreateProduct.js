@@ -3,7 +3,7 @@ import { Modal, Button, Form, Dropdown, Row, Col } from 'react-bootstrap'
 import { fetchProperties, fetchTypes, fetchGenders, createProperty, fetchCatalogs, createCatalogsInfo } from '../../http/productAPI'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
-import {createProduct, uploadImage, uploadProductInfo} from '../../http/productAPI'
+import { createProduct, uploadImage, uploadProductInfo } from '../../http/productAPI'
 
 const CreateProduct = observer(({ show, onHide }) => {
 
@@ -13,7 +13,7 @@ const CreateProduct = observer(({ show, onHide }) => {
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
-    
+
 
 
     const addInfo = () => {
@@ -36,7 +36,7 @@ const CreateProduct = observer(({ show, onHide }) => {
         const newFiles = [...images]
         newFiles.map((item) => {
             if (item.number === number) {
-                item.src = e.target.files[0]
+                item.src = e.target.value
             }
             return item
         })
@@ -76,26 +76,26 @@ const CreateProduct = observer(({ show, onHide }) => {
         fetchGenders().then(data => product.setGenders(data))
         fetchProperties().then(data => product.setProperties(data))
         fetchCatalogs().then(data => product.setCatalogs(data))
-      }, [info])
+    }, [info])
 
     //name, price, typeId, genderId
-      const addProduct = () => {
+    const addProduct = () => {
 
 
         createProduct(name, price, product.selectedType.id, product.selectedGender.id)
-        .then(data => {
-            images.forEach((element) => {
-                const formData = new FormData()
-                formData.append('productId', data.id)
-                formData.append('scr', element.src)
-                uploadImage(formData).then(data => setImages([]))
+            .then(data => {
+                images.forEach((element) => {
+                    const formData = new FormData()
+                    formData.append('productId', data.id)
+                    formData.append('scr', element.src)
+                    uploadImage(formData).then(data => setImages([]))
+                })
+                //add info
+                info.forEach((element) => {
+                    uploadProductInfo(data.id, element.id, element.description).then(data => setInfo([]))
+                })
+                createCatalogsInfo(product.selectedCatalog.name, product.selectedCatalog.id, data.id)
             })
-            //add info
-            info.forEach((element) => {
-                uploadProductInfo(data.id, element.id, element.description).then(data => setInfo([]))
-            })
-            createCatalogsInfo(product.selectedCatalog.name, product.selectedCatalog.id, data.id)
-        })
         onHide()
     }
 
@@ -109,7 +109,7 @@ const CreateProduct = observer(({ show, onHide }) => {
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Добавить новый товар
-          </Modal.Title>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Dropdown className="mt-2 mb-2">
@@ -165,7 +165,8 @@ const CreateProduct = observer(({ show, onHide }) => {
                     >
                         <Col md={6}>
                             <Form.Control
-                                type="file"
+                                value={images.scr}
+                                type="text"
                                 onChange={(e) => selectFile(e, i.number)}
                             />
                         </Col>
@@ -180,17 +181,17 @@ const CreateProduct = observer(({ show, onHide }) => {
                     onClick={addInfo}
                 >
                     Добавить характеристику товара
-                    </Button>
+                </Button>
                 {
                     info.map(i =>
                         <Row className="mt-3 d-flex align-items-center justify-content-center" key={i.number}>
                             <Col md={4}>
                                 <Dropdown className="mt-2 mb-2">
-                                    <Dropdown.Toggle>{i.title ||'Выберите свойство товара'}</Dropdown.Toggle>
+                                    <Dropdown.Toggle>{i.title || 'Выберите свойство товара'}</Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         {product.properties.map(el =>
-                                        <Dropdown.Item onClick={() => selectInfo(el.id, el.name, i.number)} key={el.id}>{el.name}</Dropdown.Item>
-                                             )}
+                                            <Dropdown.Item onClick={() => selectInfo(el.id, el.name, i.number)} key={el.id}>{el.name}</Dropdown.Item>
+                                        )}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>

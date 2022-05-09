@@ -5,6 +5,7 @@ import CreateProduct from '../components/Modals/CreateProduct';
 import CreateType from '../components/Modals/CreateType';
 import CreateProperty from '../components/Modals/CreateProperty';
 import CreateStatus from '../components/Modals/CreateStatus';
+import CreateCatalogs from '../components/Modals/CreateCatalogs';
 import { sendTestEmailApi } from './../http/productAPI'
 
 const AdminPage = () => {
@@ -14,6 +15,7 @@ const [typeVisible, setTypeVisible] = useState(false)
 const [propertyVisible, setPropertyVisible] = useState(false)
 const [productVisible, setProductVisible] = useState(false)
 const [statusVisible, setStatusVisible] = useState(false)
+const [catalogVisible, setCatalogVisible] = useState(false)
 
 const sendTestEmail = () => {
   sendTestEmailApi().then(data => {
@@ -27,6 +29,7 @@ const sendTestEmail = () => {
      <Button onClick={() => setGenderVisible(true)} variant={"outline-dark"} className="mt-2">Добавить раздел/пол</Button>
      <Button onClick={() => setPropertyVisible(true)} variant={"outline-dark"} className="mt-2">Добавить новое свойство товара</Button>
      <Button onClick={() => setStatusVisible(true)} variant={"outline-dark"} className="mt-2">Добавить новый статус заказа</Button>
+     <Button onClick={() => setCatalogVisible(true)} variant={"outline-dark"} className="mt-2">Добавить новый каталог</Button>
      <Button onClick={() => setProductVisible(true)} variant={"outline-dark"} className="mt-2">Добавить товар</Button>
      <Button onClick={() => sendTestEmail()} variant={"outline-dark"} className="mt-2">Отправить тестовое письмо</Button>
  
@@ -35,6 +38,7 @@ const sendTestEmail = () => {
      <CreateProduct show={productVisible} onHide={() => setProductVisible(false)}/>
      <CreateProperty show={propertyVisible} onHide={() => setPropertyVisible(false)}/>
      <CreateStatus show={statusVisible} onHide={() => setStatusVisible(false)}/>
+     <CreateCatalogs show={catalogVisible} onHide={() => setCatalogVisible(false)}/>
    </Container>
   )
 }

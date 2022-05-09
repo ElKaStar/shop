@@ -6,6 +6,10 @@ export const createType = async (type) => {
     const {data} = await $authhost.post('api/type', type)
     return data
 }
+export const createCatalog = async (name, scr) => {
+    const {data} = await $authhost.post('api/catalogs', {name, scr})
+    return data
+}
 
 export const fetchTypes = async (email, password) => {
     const {data} = await $host.get('api/type')
