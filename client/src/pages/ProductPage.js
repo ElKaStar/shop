@@ -67,7 +67,7 @@ const ProductPage = observer(() => {
   }
 
   const adjImages = state.images.map(e => {
-    return  `${e.scr}`
+    return `${e.scr}`
   })
 
   const addToCart = () => {
