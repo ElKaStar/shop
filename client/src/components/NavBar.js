@@ -53,7 +53,6 @@ const NavBar = observer(() => {
             <Container>
                 <NavLink className="lable" style={{ color: 'black', marginLeft: '10px', textDecoration: 'none', marginRight: '20px', borderRadius: '50%' }} to={HOME_ROUTE}>MiniLi</NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <NavLink className="link" style={{ color: '#52527a', textDecoration: 'none', borderRadius: '5px' }} to={SHOP_ROUTE}>Каталог</NavLink>
                         <NavLink className="link" style={{ color: '#52527a', textDecoration: 'none' }} to={ABOUT_ROUTE}>О Нас</NavLink>
@@ -81,7 +80,6 @@ const NavBar = observer(() => {
 
 
                     </Nav>
-                </Navbar.Collapse>
             </Container>
             <CartModal show={isCartOpen} onHide={() => setIsCartOpen(false)} />
         </Navbar>
