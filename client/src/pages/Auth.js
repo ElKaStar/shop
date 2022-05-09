@@ -32,6 +32,7 @@ const AuthPage = observer(() => {
         user.setIsAuth(true)
 
         fetchCart(currUser.id).then(data => {
+          console.log('fetchCart', data)
           if (!data || data.result === 'not found') {
             createCart(currUser.id).then(data => {
               product.setCart(data.id)
