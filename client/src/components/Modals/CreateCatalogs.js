@@ -8,7 +8,7 @@ const CreateCatalog = ({ show, onHide }) => {
     const [image, setImage] = useState('')
 
     const addCatalog = () => {
-        createCatalog({ name: value, scr: image }).then(data => {
+        createCatalog(value, image).then(data => {
             setValue('')
             setImage('')
         })
