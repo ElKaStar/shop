@@ -65,7 +65,7 @@ const Catalogs = sequelize.define('catalogs', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     isNew: {type: DataTypes.BOOLEAN},
-    scr: {type: DataTypes.STRING, unique: true}
+    scr: {type: DataTypes.STRING, allowNull: true}
 })
 
 const Property = sequelize.define('property', {
