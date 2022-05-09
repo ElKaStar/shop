@@ -85,10 +85,8 @@ const CreateProduct = observer(({ show, onHide }) => {
     }, [info])
 
     //name, price, typeId, genderId
-    const addProduct = async () => {
-
-
-        const newProd = await createProduct(name, price, product.selectedType.id, product.selectedGender.id)
+    const addProduct = () => {
+        createProduct(name, price, product.selectedType.id, product.selectedGender.id)
             .then(data => {
                 images.forEach((element) => {
                     const formData = new FormData()
@@ -100,12 +98,8 @@ const CreateProduct = observer(({ show, onHide }) => {
                 info.forEach((element) => {
                     uploadProductInfo(data.id, element.id, element.description).then(data => setInfo([]))
                 })
+                createCatalogsInfo(selectedCatalog.name, selectedCatalog.id, data.id)
             })
-        if (!newProd) {
-
-        } else {
-            createCatalogsInfo(selectedCatalog.name, selectedCatalog.id, newProd.id)
-        }
 
         onHide()
     }
