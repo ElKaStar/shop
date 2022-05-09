@@ -84,12 +84,13 @@ to this section's matching END comment to see page-specific styles.
   margin-top: 5px;
 }
 
-.mystylecard:active {
+.types_prod:first-child {
   background: rgb(139, 121, 145) !important;
   border-color: rgb(95, 77, 101) !important;
-  border-radius: 1%;
+  border-radius: 1% !important;
   color: white !important;
 } 
+
 .button-style {
   background: white !important;
   border-color: rgb(95, 77, 101) !important;

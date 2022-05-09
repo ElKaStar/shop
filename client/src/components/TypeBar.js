@@ -10,6 +10,7 @@ const TypeBar = observer(() => {
     return (
         <ListGroup className="mt-5">
             <ListGroup.Item
+                className="types_prod"
                 style={{ 
                     cursor: 'pointer'
                  }}
@@ -25,7 +26,7 @@ const TypeBar = observer(() => {
             {product.types.map((element) => {
                // console.log(product.selectedType.id)
                 return <ListGroup.Item
-                    className="types"
+                    className="types_prod"
                     style={{ cursor: 'pointer' }}
                     active={element.id === product.selectedType.id}
                     key={element.id}
