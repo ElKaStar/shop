@@ -11,7 +11,11 @@ class CartController {
             return next(ApiError.badRequest(`Id don't mentioned`))
         }
         const newCart = await Cart.create({ userId, statusId, inCart: true })
-        return res.json(newCart)
+        if (!newCart) {
+            return res.status(404).json({data: 'not found'})
+        } else {
+            return res.json(newCart)
+        }
     }
     async getCartByUser(req, res, next) {
         const { userId } = req.query
@@ -26,7 +30,7 @@ class CartController {
             }
         })
         if (currCart === null) {
-            return res.status(200).json({ result: 'not found' })
+            return res.status(204).json({ result: 'not found' })
         }
         return res.json(currCart)
     }

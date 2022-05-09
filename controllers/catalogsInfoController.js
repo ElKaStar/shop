@@ -38,8 +38,11 @@ class CatalogsInfoController {
             replacements: { catalogId:  catalogId}
           }
          );
-        console.log(results)
-       return res.json(results)
+         if (!results) {
+            return res.status(204).json({ data: 'not found' })
+        } else {
+            return res.json(results)
+        }
     }
     async getNewProductsFrCatalog(req, res, next) {
         const [results] = await sequelize.query(
@@ -55,8 +58,11 @@ class CatalogsInfoController {
         left join public.images on (new_prods.id = "productId")
         Order by new_prods.id;`
          );
-        console.log(results)
-       return res.json(results)
+       if (!results) {
+            return res.status(204).json({data: 'not found'})
+       } else {
+        return res.json(results)
+       }
     }
 
 }

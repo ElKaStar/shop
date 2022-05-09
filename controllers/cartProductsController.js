@@ -24,9 +24,9 @@ class CartProductsController {
         return res.json(currCartProduct)
     }
     async getCartProductsByCartId(req, res, next) {
-        
+
         const { cartId } = req.query
-        console.log('getCart', )
+        console.log('getCart',)
         if (!cartId) {
             return next(ApiError.badRequest(`Id don't mentioned`))
         }
@@ -49,10 +49,14 @@ class CartProductsController {
                 replacements: { cartId: cartId }
             }
         )
-        return res.json(results)
+        if (!results) {
+            return res.status(204).json({ data: 'not found' })
+        } else {
+            return res.json(results)
+        }
     }
     async getImagesforCartProducts(req, res, next) {
-        const {productsIds} = req.body
+        const { productsIds } = req.body
         if (!productsIds) {
             return next(ApiError.badRequest(`Id don't mentioned`))
         }
@@ -65,39 +69,43 @@ class CartProductsController {
                 replacements: { productsIds: productsIds }
             }
         )
-        return res.json(results)
+        if (!results) {
+            return res.status(204).json({ data: 'not found' })
+        } else {
+            return res.json(results)
+        }
     }
-    async delete(req, res) {  
-        try{
+    async delete(req, res) {
+        try {
             const { cartId, productId } = req.query
             const [results] = await sequelize.query(
-            `DELETE FROM public.cart_products
+                `DELETE FROM public.cart_products
             WHERE "productId" = :productId and "cartId" = :cartId`,
-            {
-                replacements: { productId: productId, cartId: cartId}
-            }
-        )
-            return res.status(200).json({result: 'succes'})
-        } catch(err) {
+                {
+                    replacements: { productId: productId, cartId: cartId }
+                }
+            )
+            return res.status(200).json({ result: 'succes' })
+        } catch (err) {
             throw err
         }
     }
-    async changeQuantity(req, res) {  
-        try{
+    async changeQuantity(req, res) {
+        try {
             const { cartId, productId, quantity } = req.body
             if (!cartId || !productId || !quantity) {
                 return next(ApiError.badRequest(`Id don't mentioned`))
             }
             const [results] = await sequelize.query(
-            `UPDATE public.cart_products
+                `UPDATE public.cart_products
             SET quantity = :quantity
             WHERE "productId" = :productId and "cartId" = :cartId`,
-            {
-                replacements: { productId: productId, cartId: cartId, quantity: quantity}
-            }
-        )
-            return res.status(200).json({result: 'succes'})
-        } catch(err) {
+                {
+                    replacements: { productId: productId, cartId: cartId, quantity: quantity }
+                }
+            )
+            return res.status(200).json({ result: 'succes' })
+        } catch (err) {
             throw err
         }
     }
