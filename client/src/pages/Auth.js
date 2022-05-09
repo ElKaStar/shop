@@ -26,7 +26,7 @@ const AuthPage = observer(() => {
         currUser = await registration(email, password)
       }
       if (!currUser) {
-
+        console.log('currUser', currUser)
       } else {
         user.setUser(currUser)
         user.setIsAuth(true)
