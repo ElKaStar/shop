@@ -3,7 +3,7 @@ import { Container, Card, Form, Button, Row } from 'react-bootstrap'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { login, registration } from '../../src/http/userAPI'
 import { fetchCart, fetchCartProductsByCartId, createCart } from '../../src/http/productAPI'
-import { REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts'
+import { REGISTRATION_ROUTE, HOME_ROUTE } from '../utils/consts'
 import { LOGIN_ROUTE } from '../utils/consts'
 import { observer } from 'mobx-react-lite'
 import { Context } from '..'
@@ -43,7 +43,7 @@ const AuthPage = observer(() => {
           product.setCart(cart.id)
         }
       }
-      history.push(SHOP_ROUTE)
+      history.push(HOME_ROUTE)
     } catch (e) {
       throw e
     }
