@@ -12,7 +12,7 @@ class CartController {
         }
         const newCart = await Cart.create({ userId, statusId, inCart: true })
         if (!newCart) {
-            return res.status(404).json({data: 'not found'})
+            return res.status(404).json({ data: 'not found' })
         } else {
             return res.json(newCart)
         }
@@ -22,17 +22,18 @@ class CartController {
         console.log('userId', userId)
         if (!userId) {
             return next(ApiError.badRequest(`Id don't mentioned`))
-        }
-        const currCart = await Cart.findOne({
-            where: {
-                userId: userId,
-                inCart: true
+        } else {
+            const currCart = await Cart.findOne({
+                where: {
+                    userId: userId,
+                    inCart: true
+                }
+            })
+            if (!currCart) {
+                return res.status(404).json({ result: 'not found' })
             }
-        })
-        if (currCart === null) {
-            return res.status(204).json({ result: 'not found' })
+            return res.json(currCart)
         }
-        return res.json(currCart)
     }
     async changeToOrder(req, res, next) {
         const { cartId } = req.body
