@@ -15,7 +15,8 @@ const ProductItem = ({ product, role }) => {
             style={{ width: '15rem', height: { height } }} className='m-2 text-center cardStyle'>
             <Card.Img
                 style={{ width: '15rem', height: '18rem' }}
-                variant="top" className="m-auto p-2" src={!product.images[0] ? productTemplate : `${product.images[0].scr}`} />
+                variant="top" className="m-auto p-2" 
+                src={!product.images[0] ? productTemplate : product.images[0].scr} />
             <Card.Body className="m-0 pb-1 pt-1">
                 <Card.Title>{product.name}</Card.Title>
                 <hr style={{ paddingTop: '0px', marginTop: '0px' }} />

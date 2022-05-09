@@ -25,6 +25,7 @@ const AuthPage = observer(() => {
       } else {
         currUser = await registration(email, password)
       }
+      console.log('currUser1', currUser)
       if (!currUser) {
         console.log('currUser', currUser)
       } else {
@@ -34,10 +35,12 @@ const AuthPage = observer(() => {
         fetchCart(currUser.id).then(data => {
           console.log('fetchCart', data)
           if (!data || data.result === 'not found') {
+            console.log('currUser2', currUser)
             createCart(currUser.id).then(data => {
               product.setCart(data.id)
             })
           } else {
+            console.log('currUser3', currUser)
             product.setCart(data.id)
           }
         })
