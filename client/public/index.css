@@ -84,7 +84,7 @@ to this section's matching END comment to see page-specific styles.
   margin-top: 5px;
 }
 
-.types_prod:first-child {
+.types_prod:active {
   background: rgb(139, 121, 145) !important;
   border-color: rgb(95, 77, 101) !important;
   border-radius: 1% !important;
