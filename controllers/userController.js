@@ -39,7 +39,7 @@ class UserController {
         }
         let comparePassword = bcrypt.compareSync(password, candidate.password)
         if (!comparePassword) {
-            return next(ApiError.internal(`Email or password don't compated`))
+            return next(ApiError.badRequest(`Email or password don't compated`))
         }
         const token = generateJwt(candidate.id, candidate.email, candidate.role)
         return res.json({token})
