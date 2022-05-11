@@ -5,7 +5,7 @@ import { Context } from '../index'
 import productTemplate from '../accets/product_img.jpg'
 import { useHistory } from 'react-router'
 import { PRODUCT_ROUTE } from '../utils/consts'
-import getImage from '../http/productAPI'
+import {getImage} from '../http/productAPI'
 
 const ProductItem = ({ product, role }) => {
     const history = useHistory()
