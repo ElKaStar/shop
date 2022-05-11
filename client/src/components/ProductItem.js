@@ -5,10 +5,19 @@ import { Context } from '../index'
 import productTemplate from '../accets/product_img.jpg'
 import { useHistory } from 'react-router'
 import { PRODUCT_ROUTE } from '../utils/consts'
+import getImage from '../http/productAPI'
 
 const ProductItem = ({ product, role }) => {
     const history = useHistory()
     const height = role === 'ADMIN' ? '28rem' : '25rem'
+
+    const getImages = async (scr) => {
+        if (!scr) {
+            return productTemplate
+        }
+        const image = await getImage(scr)
+        return image
+    }
     return (
         <Card
             onClick={() => history.push(PRODUCT_ROUTE + '/' + product.id)}
@@ -16,7 +25,7 @@ const ProductItem = ({ product, role }) => {
             <Card.Img
                 style={{ width: '15rem', height: '18rem' }}
                 variant="top" className="m-auto p-2" 
-                src={!product.images[0] ? productTemplate : product.images[0].scr} />
+                src={getImages(product.images[0].scr)} />
             <Card.Body className="m-0 pb-1 pt-1">
                 <Card.Title>{product.name}</Card.Title>
                 <hr style={{ paddingTop: '0px', marginTop: '0px' }} />

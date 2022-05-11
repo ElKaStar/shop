@@ -147,6 +147,11 @@ export const sendTestEmailApi = async () => {
     return data
 }
 
+export const getImage =  async (id) => {
+    const {data} = await $host.get('product/' + id)
+    return data
+}
+
 
 
 
