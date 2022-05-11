@@ -20,8 +20,20 @@ app.use(errorHandlingMiddleware)
 
 app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile((path.resolve(__dirname, 'client', 'build', 'index.html')))
 })
+
+app.get('/product/:uid', function(req, res){
+    const uid = req.params.uid
+
+    req.mayViewFilesFrom(uid, function(yes){
+      if (yes) {
+        res.sendFile((path.resolve(__dirname, 'static', uid)));
+      } else {
+        res.send(403, 'Sorry! you cant see that.');
+      }
+    });
+  });
 
 
 

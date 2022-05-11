@@ -5,4 +5,5 @@ const imagesController = require('../controllers/imagesController')
 router.post('/', imagesController.addToProductId)
 router.get('/:id', imagesController.getByProductId)
 
+
 module.exports = router

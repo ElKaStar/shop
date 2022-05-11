@@ -13,6 +13,7 @@ class ImagesController {
         return res.json(image)
     }
     async getByProductId(req, res) {
+        const { id } = req.params
         
     }
 }
